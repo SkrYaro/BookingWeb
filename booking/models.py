@@ -1,10 +1,11 @@
+from django.utils import timezone
+
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 from django.db import models
 
 
 # Create your models here.
-
 
 class Post(models.Model):
     title = models.CharField(max_length=100)
@@ -34,3 +35,23 @@ class Book(models.Model):
 
     def __str__(self):
         return self.title.title
+
+    def clean(self):
+        if self.time_start >= self.time_end:
+            raise ValidationError('Час завершення має бути пізніше за час початку.')
+
+        if self.time_start < timezone.now():
+            raise ValidationError('Не можна бронювати час у минулому.')
+
+        overlapping = Book.objects.filter(
+            time_start__lt=self.time_end,
+            time_end__gt=self.time_start,
+        ).exclude(id=self.id)
+
+        if overlapping.exists():
+            raise ValidationError('Цей час уже зайнятий іншим бронюванням.')
+
+    def save(self, *args, **kwargs):
+        self.full_clean()  # Запуск clean() перед збереженням
+        super().save(*args, **kwargs)
+
