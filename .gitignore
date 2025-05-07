@@ -1,3 +1,11 @@
+# Ігнорування IDE
 .idea/
+
+# Віртуальне середовище
 venv/
-__pychache__
+
+# Python кеш-файли
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
