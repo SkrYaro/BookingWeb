@@ -9,3 +9,7 @@ __pycache__/
 *.pyc
 *.pyo
 *.pyd
+
+booking/migrations/
+
+db.sqlite3

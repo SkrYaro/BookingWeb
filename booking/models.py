@@ -60,3 +60,18 @@ class Book(models.Model):
     def save(self, *args, **kwargs):
         self.full_clean()  # Запуск clean() перед збереженням
         super().save(*args, **kwargs)
+
+class Profile(models.Model):
+    genders = (
+        ("man","Чоловік"),
+        ("woman","Жінка")
+    )
+    name = models.OneToOneField(User ,on_delete=models.CASCADE)
+    gender = models.CharField(choices=genders,max_length=100,blank=True,null=True)
+    date_of_birth = models.DateTimeField(null=True,blank=True, default=None)
+    avatar = models.TextField(blank=True, null=True,default=' ')
+    bio = models.TextField(blank=True,null=True)
+
+    def __str__(self):
+        return self.name.username
+
