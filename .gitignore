@@ -1,6 +1,11 @@
+# Ігнорування IDE
 .idea/
+
+# Віртуальне середовище
 venv/
- __pycache__/
- booking/__pycache__/admin.cpython-311.pyc
- booking/__pycache__/models.cpython-311.pyc
- booking/__pycache__/views.cpython-311.pyc
+
+# Python кеш-файли
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
