@@ -22,4 +22,5 @@ import booking.views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', booking.views.look_main, name='main')
+    path('users/' booking.views.look_users, name='users')
 ]
