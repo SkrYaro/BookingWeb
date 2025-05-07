@@ -11,3 +11,10 @@ def look_main(request):
         'posts':posts
     }
     return render(request, "main.html", context=context)
+
+def look_users(request):
+    users = User.objects.all()
+    context = {
+        'users':users
+    }
+    return render(request, "users.html", conects=context)
