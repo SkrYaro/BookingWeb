@@ -17,4 +17,4 @@ def look_users(request):
     context = {
         'users':users
     }
-    return render(request, "users.html", conects=context)
+    return render(request, "users.html", context=context)

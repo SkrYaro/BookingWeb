@@ -1,21 +1,95 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Main</title>
-</head>
-<body>
-{%for post in posts%}
-    <hr>
-    <h1>{{post.title}}</h1>
-    <p>{{post.owner}}</p>
-    <p>{{post.description}}</p>
-    <p>{{post.cost}}</p>
-    {% if not post.image %}
-        <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBwgHBgkIBwgKCgkLDRYPDQwMDRsUFRAWIB0iIiAdHx8kKDQsJCYxJx8fLT0tMTU3Ojo6Iys/RD84QzQ5OjcBCgoKDQwNGg8PGjclHyU3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3N//AABEIAMAAzAMBIgACEQEDEQH/xAAbAAEBAQADAQEAAAAAAAAAAAAAAQUDBAYCB//EADIQAQACAQIDBQUHBQAAAAAAAAABAgMEEQUhMRITQVFxIlJhcpEUFSQzU2LBMkJEobH/xAAVAQEBAAAAAAAAAAAAAAAAAAAAAf/EABYRAQEBAAAAAAAAAAAAAAAAAAABEf/aAAwDAQACEQMRAD8A/KAFQAAAAAAAAAAAAAAAAAAAAAABAUSFABAJNwAVFAAAAAAAEWAAAEVOQKgAQqKAACQqKAioCoACooAG4J6cyOc7RHPyafDuGd/WMufeuOelfebOHBjwViMVK0iPKOa4PMV02e0b1w5Jj5ZLafNSN74ckR5zWXqpjf4+pt6GDyM8p2SHqs+lw56zGSkT8Y5SwdforaSYmJ7WOeljB1AEBFQA8AAlUUABBFBQABNhQAADd2eHaeNTqqY5jekc7ejqtngFI7Oa/jvELBrREREREdFHBrdR9m098sc5jlAOceVy58uW82yZbTafj0c2h1uXT5axa9pxzO1omdwekcefFTNitjvHK0bS+4nfmoPJ5sU4slsdutZ2cbR45Ts6uLR/dXeWd4oKigCKAAAIoAAAAAAAACNzgPLT5I/f/DEbfA71rgyRMxv2vGfgsGoz+Nx+Cj54d7vK+9X6s3jeSs6WK9qN5tExEAxJlNxyYadvLSnnMQD1OLljrH7YfaRG0beS+IMXj35uL5ZZLS43ftamlfKrNhBQAAAAAAAAAAABJWAAAAAAQBocGwd9q+8tHs443nbzdGsTa0ViN5npHm9Lw/TRpdPFdvbnnefio7KWnZWfxfVdzgmlZ9vJG0fCPEGNrcvfaq946b7R6OEj13EAEBRFAEhQAAAAAAQJAWBFAAABzaTD9o1FMXhPX0WDS4LpP8nLHOf6In/rXfFaxSsVrG1YjaPR9bxHUHHqMtMOK2S8+zWN5eZ1Oe2oy2yXnr0jyh3uM6qb5YwVn2ac7erM2QUABCQFEAIVIUAAEhUUAAEFARQAAAavAcUTky5fKOzDK6NvgO3cZZ/csGo4tTk7rT5Mnu13crqcUn8Bl28gectabTNrTvM85lDfkIAAJIoAioCgAAAAAAAAAAAAAOzo9bl0kzNNrRPWLOs7/DdBXWVva+SaxWdtojmsHJ99Zv0sf+3FqeKZs+G2OaUrFuuzufcmL9bJ9IfOXg2KmK1q5rzMRM7TsDHjoJ0VAAABAUAAAAEQIVFUQAAAFEUAAEno3OA/k5fm/hiO/wAO19dJW9bUm0WnflPQHoHFqeeDJv7suhPGsX6V/rDizcYpfHatMV95jbnsujJ8IISN/FYQBFBEUANwAiVQBQQFAARUAIADxVPFQAAEUBAAFhFgAAER9SgAAKJCgAAQAAigIKkgKQAAAAAgoAAAAAAAigAAAAP/2Q==" class="author-pfp">
-    {% else %}
-        <img src="{{post.image}}">
-    {% endif %}
-    {%endfor%}
-</body>
+	<head>
+		<meta charset="UTF-8" />
+		<title>Main</title>
+		<style>
+			body {
+				font-family: Arial, Helvetica, sans-serif;
+			}
+			.post-box {
+				max-width: 45%;
+				display: flex;
+				flex-direction: row;
+				gap: 20px;
+				border: 1px solid gray;
+				margin-bottom: 20px;
+				padding: 20px;
+			}
+			.posts {
+				display: flex;
+				gap: 20px;
+				flex-wrap: wrap;
+			}
+			.right-part {
+				width: 100%;
+				display: flex;
+				flex-direction: column;
+			}
+			.left-part {
+				border-right: 1px solid gray;
+				padding-right: 20px;
+			}
+			.title {
+				font-size: 30px;
+				margin: 0;
+				font-weight: bold;
+			}
+			.title-cost {
+				display: flex;
+				flex-direction: row;
+				justify-content: space-between;
+			}
+			.cost,
+			.order {
+				background-color: green;
+				color: white;
+				padding: 10px 30px;
+				font-size: 16px;
+				font-weight: bold;
+				border-radius: 20px;
+				margin: 0;
+			}
+			.order {
+				border: 0;
+				border-radius: 5px;
+				background-color: black;
+			}
+			.owner {
+				margin: 0;
+				color: gray;
+			}
+			.right-part a {
+				margin-top: auto;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="posts">
+			{%for post in posts%}
+			<div class="post-box">
+				<div class="left-part">
+					{% if not post.image %}
+					<img
+						src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBwgHBgkIBwgKCgkLDRYPDQwMDRsUFRAWIB0iIiAdHx8kKDQsJCYxJx8fLT0tMTU3Ojo6Iys/RD84QzQ5OjcBCgoKDQwNGg8PGjclHyU3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3N//AABEIAMAAzAMBIgACEQEDEQH/xAAbAAEBAQADAQEAAAAAAAAAAAAAAQUDBAYCB//EADIQAQACAQIDBQUHBQAAAAAAAAABAgMEEQUhMRITQVFxIlJhcpEUFSQzU2LBMkJEobH/xAAVAQEBAAAAAAAAAAAAAAAAAAAAAf/EABYRAQEBAAAAAAAAAAAAAAAAAAABEf/aAAwDAQACEQMRAD8A/KAFQAAAAAAAAAAAAAAAAAAAAAABAUSFABAJNwAVFAAAAAAAEWAAAEVOQKgAQqKAACQqKAioCoACooAG4J6cyOc7RHPyafDuGd/WMufeuOelfebOHBjwViMVK0iPKOa4PMV02e0b1w5Jj5ZLafNSN74ckR5zWXqpjf4+pt6GDyM8p2SHqs+lw56zGSkT8Y5SwdforaSYmJ7WOeljB1AEBFQA8AAlUUABBFBQABNhQAADd2eHaeNTqqY5jekc7ejqtngFI7Oa/jvELBrREREREdFHBrdR9m098sc5jlAOceVy58uW82yZbTafj0c2h1uXT5axa9pxzO1omdwekcefFTNitjvHK0bS+4nfmoPJ5sU4slsdutZ2cbR45Ts6uLR/dXeWd4oKigCKAAAIoAAAAAAAACNzgPLT5I/f/DEbfA71rgyRMxv2vGfgsGoz+Nx+Cj54d7vK+9X6s3jeSs6WK9qN5tExEAxJlNxyYadvLSnnMQD1OLljrH7YfaRG0beS+IMXj35uL5ZZLS43ftamlfKrNhBQAAAAAAAAAAABJWAAAAAAQBocGwd9q+8tHs443nbzdGsTa0ViN5npHm9Lw/TRpdPFdvbnnefio7KWnZWfxfVdzgmlZ9vJG0fCPEGNrcvfaq946b7R6OEj13EAEBRFAEhQAAAAAAQJAWBFAAABzaTD9o1FMXhPX0WDS4LpP8nLHOf6In/rXfFaxSsVrG1YjaPR9bxHUHHqMtMOK2S8+zWN5eZ1Oe2oy2yXnr0jyh3uM6qb5YwVn2ac7erM2QUABCQFEAIVIUAAEhUUAAEFARQAAAavAcUTky5fKOzDK6NvgO3cZZ/csGo4tTk7rT5Mnu13crqcUn8Bl28gectabTNrTvM85lDfkIAAJIoAioCgAAAAAAAAAAAAAOzo9bl0kzNNrRPWLOs7/DdBXWVva+SaxWdtojmsHJ99Zv0sf+3FqeKZs+G2OaUrFuuzufcmL9bJ9IfOXg2KmK1q5rzMRM7TsDHjoJ0VAAABAUAAAAEQIVFUQAAAFEUAAEno3OA/k5fm/hiO/wAO19dJW9bUm0WnflPQHoHFqeeDJv7suhPGsX6V/rDizcYpfHatMV95jbnsujJ8IISN/FYQBFBEUANwAiVQBQQFAARUAIADxVPFQAAEUBAAFhFgAAER9SgAAKJCgAAQAAigIKkgKQAAAAAgoAAAAAAAigAAAAP/2Q=="
+						class="post-image"
+					/>
+					{% else %}
+					<img src="{{post.image}}" class="post-image" />
+					{% endif %}
+				</div>
+				<div class="right-part">
+					<div class="title-cost">
+						<p class="title">{{post.title}}</p>
+						<p class="cost">{{post.cost}}.00$</p>
+					</div>
+
+					<p class="owner">{{post.owner}}</p>
+					<p class="description">{{post.description}}</p>
+					<a href=""><button class="order">Замовити</button></a>
+				</div>
+			</div>
+			{%endfor%}
+		</div>
+	</body>
 </html>
