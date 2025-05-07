@@ -1,3 +1,6 @@
 .idea/
 venv/
-__pychache__/
+ __pycache__/
+ booking/__pycache__/admin.cpython-311.pyc
+ booking/__pycache__/models.cpython-311.pyc
+ booking/__pycache__/views.cpython-311.pyc
